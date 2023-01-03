@@ -15,13 +15,12 @@ Xingyu Lin, Zhiao Huang, Yunzhu Li, Joshua B. Tenenbaum, David Held, Chuang Gan
 [Website](https://xingyu-lin.github.io/diffskill/) /  [Paper](https://openreview.net/pdf?id=Kef8cKdHWpP)
 
 # Table of Contents
-- 1 [Installation](#installation-instructions)
-- 2 [Environments](#environments)
-- 3 [Training](#training)
-- 4 [Planning and Execution](#planning-and-execution)
-- 5 [Notes for DiffSkill](#notes-for-diffskill)
-- 6 [Pretrained Models](#pretrained)
-- 7 [Pretrained models and data](#pretrained-models-and-data)
+1. [Installation](#installation-instructions)
+2. [Environments](#environments)
+3. [Preparation](#preparation)
+4. [Training and evaluation of PASTA](#training-and-evaluation-of-pasta)
+5. [Notes for DiffSkill](#notes-for-diffskill)
+6. [Pretrained models and data](#pretrained-models-and-data)
 
 ### Installation instructions
 1. Install conda environments by running `conda env create -f environment.yml` and activate the conda environment: `conda activate plb`.
