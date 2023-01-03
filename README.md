@@ -2,13 +2,13 @@
 # Introduction
 This repository contains the official implementation of the following two papers:
 
-**[1] Planning with Spatial-Temporal Abstraction from Point Clouds for Deformable Object Manipulation** 
+**[1] (CoRL 2022) Planning with Spatial-Temporal Abstraction from Point Clouds for Deformable Object Manipulation** 
 
-Xingyu Lin*, Carl Qi*, Yunchu Zhang,  Zhiao Huang, Katerina Fragkiadaki, Yunzhu Li, Chuang Gan, David Held
+Xingyu Lin*, Carl Qi*, Yunchu Zhang, Zhiao Huang, Katerina Fragkiadaki, Yunzhu Li, Chuang Gan, David Held
 
 [Website](https://sites.google.com/view/pasta-plan) /  [Paper](https://arxiv.org/abs/2210.15751)
 
-**[2] DiffSkill: Skill Abstraction from Differentiable Physics for Deformable Object Manipulations with Tools**
+**[2] (ICLR 2022) DiffSkill: Skill Abstraction from Differentiable Physics for Deformable Object Manipulations with Tools**
 
 Xingyu Lin, Zhiao Huang, Yunzhu Li, Joshua B. Tenenbaum, David Held, Chuang Gan
 
