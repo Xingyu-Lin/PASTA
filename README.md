@@ -1,36 +1,70 @@
-# PASTA - Planning with Spatial-Temporal Abstraction from Point Clouds for Deformable Object Manipulation
+# PASTA
+# Introduction
+This repository contains the official implementation of the following two papers:
 
-### Prerequsite
-1. Install conda environments according to `environment.yml`, and then run `conda activate plb`.
-2. Install [torch (1.9.0) with cudatoolkit (10.2)](https://pytorch.org/get-started/previous-versions/)
-3. Install [pykeops (1.5)](https://www.kernel-operations.io/keops/python/installation.html); make sure version==1.5
-3. Install [geomloss](https://www.kernel-operations.io/geomloss/api/install.html)
-4. Install [PointFlow](https://github.com/stevenygd/PointFlow)
-5. Run `./prepare.sh`
-6. Download initial and target configurations of environments from [[Google Drive link for datasets (3G)]](https://drive.google.com/drive/folders/1ckOkxsuqK44Ay0e1I5EKmX3cOATB4Jam?usp=share_link)
-7. (Optional) Download demonstration trajectories from [[Google Drive link for demonstration trajectories (16G)]](https://drive.google.com/drive/folders/1uzFKI5rehp2VMYc5MKyE-CPbSoEcKCup?usp=share_link)
-8. (Optional) Download pretrained models from [[Google Drive link for pre-trained models (300M)]](https://drive.google.com/drive/folders/18tmH0stc1z_TzfAHbQDu5HASNkaWFKk_?usp=share_link)
+**[1] Planning with Spatial-Temporal Abstraction from Point Clouds for Deformable Object Manipulation** 
+
+Xingyu Lin*, Carl Qi*, Yunchu Zhang,  Zhiao Huang, Katerina Fragkiadaki, Yunzhu Li, Chuang Gan, David Held
+
+[Website](https://sites.google.com/view/pasta-plan) /  [Paper](https://arxiv.org/abs/2210.15751)
+
+**[2] DiffSkill: Skill Abstraction from Differentiable Physics for Deformable Object Manipulations with Tools**
+
+Xingyu Lin, Zhiao Huang, Yunzhu Li, Joshua B. Tenenbaum, David Held, Chuang Gan
+
+[Website](https://xingyu-lin.github.io/diffskill/) /  [Paper](https://openreview.net/pdf?id=Kef8cKdHWpP)
+
+# Table of Contents
+- 1 [Installation](#installation-instructions)
+- 2 [Environments](#environments)
+- 3 [Training](#training)
+- 4 [Planning and Execution](#planning-and-execution)
+- 5 [Notes for DiffSkill](#notes-for-diffskill)
+- 6 [Pretrained Models](#pretrained)
+- 7 [Pretrained models and data](#pretrained-models-and-data)
+
+### Installation instructions
+1. Install conda environments by running `conda env create -f environment.yml` and activate the conda environment: `conda activate plb`.
+2. Install [torch (1.9.0)](https://pytorch.org/get-started/previous-versions/)
+3. Install packages for computing the EMD loss:
+   * [pykeops (1.5)](https://www.kernel-operations.io/keops/python/installation.html); make sure version is 1.5
+   * [geomloss](https://www.kernel-operations.io/geomloss/api/install.html)
+4. Install necessary packages for [PointFlow](https://github.com/stevenygd/PointFlow), which we use for encoding point clouds into latent space.
+5. Run `./prepare.sh` to activate the conda environment and set up the path
 
 ### Environments
-We currently include three tasks from the paper:
-| LiftSpread  | CutRearrange | CutRearrangeSpread (CRS) |
-| :---: | :---: | :---: |
-| <img src="media/LiftSpread-v1_PASTA.gif" width="200">  | <img src="media/CutRearrange-v1_PASTA.gif" width="200">  | <img src="media/CutRearrangeSpread-v1_PASTA.gif" width="200">  |
+This code includes the three tasks from the PASTA paper. The visualization shows the execution of the learned planner and policies. 
+
+| LiftSpread  | CutRearrange |              CutRearrangeSpread (CRS), CRS-Twice              |
+| :---: | :---: |:-------------------------------------------------------------:|
+| <img src="media/LiftSpread-v1_PASTA.gif" width="200">  | <img src="media/CutRearrange-v1_PASTA.gif" width="200">  | <img src="media/CutRearrangeSpread-v1_PASTA.gif" width="200"> |
 
 * **LiftSpread**: The agent needs to first use a spatula (modeled as a thin surface) to lift a dough onto the cutting board and then adopt a rolling pin to roll over the dough to flatten it. The rolling pin is simulated as a 3-Dof capsule that can rotate along the long axis and the vertical axis and translate along the vertical axis to press the dough.
 * **CutRearrange**:  This is a three-step task. Given an initial pile of dough, the agent needs to first cut the dough in half using a knife. Inspired by the recent cutting simulation (Heiden et al., 2021), we model the knife using a thin surface as the body and a prism as the blade. Next, the agent needs to use the gripper to transport each piece of the cut dough to target locations.
 * **CutRearrangeSpread (CRS)** This task provides a number of demonstration trajectories performing one of the three skills: Cutting with a knife, pushing with a pusher, and spreading with a roller. The demonstration of each skill only shows a tool manipulating a single piece of dough.
 
-### Training Procedures
-The following procedures describe a pipeline for training PASTA. Note that many of the steps can be easily achieved by downloading datasets/models from the Google Drive links. If you want to train PASTA from scratch, you can follow the pipeline step-by-step.
-1. For every environment, one needs to pre-generate initial and target configurations. An example run script is `run_scripts/generate_init_target.sh`. To download pre-generated configurations of the 3 environments above, please go to **step 6 of Prerequsite**.
-2. To generate demonstration trajectories, one needs to run gradient-based trajectory optimization (GBTO). An example run script is `run_scripts/run_gbto.sh`. To download pre-generated demonstration trajectories of the 3 environments above, please go to **step 7 of Prerequsite**.
-One also needs to post-process the demonstration data by running DBSCAN, if they are running GBTO from scratch.(see `run_scripts/run_dbscan.sh`) However, we already did this for you for the pre-generated demonstration data, so you don't need to do this again.
-3. To actually train PASTA, one first needs to train a [PointFlow](https://github.com/stevenygd/PointFlow) VAE. Example run scripts are `PointFlow/scripts/set_<env_name>_gen_dist.sh`. To download pre-generated PointFlow models of the 3 environments above, please go to **step 8 of Prerequsite**.
-4. Next, one needs to train PASTA's policy networks, which are parameterized by [PointNet++](https://github.com/pyg-team/pytorch_geometric). An example run script is `run_scripts/pasta_train_policy.sh` To download pre-generated policy models, please go to **step 8 of Prerequsite**.
-5. Finally, one needs to train PASTA's abstraction modules (feasibility and cost predictors). Additionally, one needs to load the policy and VAE to evaluate the full model's performance. An example run script is `run_scripts/pasta_train_abstraction.sh`
-6. To evaluate pretrained PASTA models, one can download the models from the Google Drive and run `run_scripts/pasta_plan.sh`
+### Preparation
+1. **Environment setup** We need to first generate initial and target configurations for each environment both for generating demonstration and for evaluation
+   * You can download the pre-generated initial and target configurations here: [[Google Drive link for datasets (3G)]](https://drive.google.com/drive/folders/1ckOkxsuqK44Ay0e1I5EKmX3cOATB4Jam?usp=share_link). Unzip the downloaded file and put the `data` folder under the root directory of this repository.
+   * Alternatively, you can generate the initial and target configurations by running `python run_scripts/generate_initial_target.py`.
+2. **Generate demonstration** We run gradient-based trajectory optimization (GBTO) given each initial and target configuration. An example run script is `run_scripts/run_gbto.sh`. 
+    You also need to post-process the demonstration data by running DBSCAN. This can be done by running `run_scripts/run_dbscan.sh`.
+   * See [Pretrained](#pretrained-models-and-data) the pre-generated demonstration data. 
 
+### Training and evaluation of PASTA
+For training PASTA, we sequentailly train the point cloud VAE, the polices, the feasibility and the cost predictors.
+1. The point cloud VAE [PointFlow](https://github.com/stevenygd/PointFlow) can be trained by running `PointFlow/scripts/set_<env_name>_gen_dist.sh`.
+2. The policy networks, which are parameterized by [PointNet++](https://github.com/pyg-team/pytorch_geometric) can be trained by running `run_scripts/pasta_train_policy.sh` 
+3. Finally, one needs to train PASTA's abstraction modules (feasibility and cost predictors). Make sure you have loaded the trained VAE and policies for correct evaluation. An example run script is `run_scripts/pasta_train_abstraction.sh`
+
+To plan and execute the PASTA models for evaluation, you can run `run_scripts/pasta_plan.sh`. See [Pretrained](#pretrained-models-and-data) for the pretrained models.
+
+### Notes for DiffSkill
+[ ] TODO
+
+### Pretrained models and data
+* Download demonstration trajectories: [[Google Drive link for demonstration trajectories (16G)]](https://drive.google.com/drive/folders/1uzFKI5rehp2VMYc5MKyE-CPbSoEcKCup?usp=share_link)
+* Download pretrained PASTA models: [[Google Drive link for pre-trained models (300M)]](https://drive.google.com/drive/folders/18tmH0stc1z_TzfAHbQDu5HASNkaWFKk_?usp=share_link)
 
 Bon Appetit!
 
@@ -47,5 +81,15 @@ author={Xingyu Lin and Carl Qi and Yunchu Zhang and Zhiao Huang and Katerina Fra
 booktitle={6th Annual Conference on Robot Learning},
 year={2022},
 url={https://openreview.net/forum?id=tyxyBj2w4vw}
+}
+```
+
+```
+@inproceedings{lin2022diffskill,
+title={DiffSkill: Skill Abstraction from Differentiable Physics for Deformable Object Manipulations with Tools},
+author={Xingyu Lin and Zhiao Huang and Yunzhu Li and Joshua B. Tenenbaum and David Held and Chuang Gan},
+booktitle={International Conference on Learning Representations},
+year={2022},
+url={https://openreview.net/forum?id=Kef8cKdHWpP}}
 }
 ```
