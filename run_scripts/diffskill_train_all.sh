@@ -1,0 +1,20 @@
+python core/diffskill/train_diffskill_rgb.py \
+    --env_name 'CutRearrange-v1' \
+    --input_mode 'rgbd' \
+    --dataset_path '<PATH TO DEMONSTRATION DATASET>' \
+    --train_modules 'vae' 'reward' 'policy' 'fea' \
+    --plan_step 3 \
+    --num_tools 2 \
+    --batch_size 256 \
+    --actor_latent_dim 64 \
+    --reward_latent_dim 1024 \
+    --fea_latent_dim 1024 \
+    --t_relative True \
+    --num_random_neg 2048 \
+    --num_buffer_neg 2048 \
+    --il_eval_freq 1 \
+    --il_num_epoch 50 \
+    --min_zlogl -4 \
+    --adam_iter 500 \
+    --adam_lr 5e-1 \
+    --adam_sample 1000

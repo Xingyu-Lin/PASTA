@@ -1,0 +1,19 @@
+python core/diffskill/train_flat3d.py \
+    --env_name 'CutRearrange-v1' \
+    --input_mode 'pc' \
+    --dataset_path '<PATH TO DEMONSTRATION DATASET>' \
+    --vae_resume_path '<PATH TO PRETRAINED POINTFLOW MODEL>' \
+    --plan_step 3 \
+    --num_tools 2 \
+    --dimz 2 \
+    --batch_size 64 \
+    --actor_latent_dim 64 \
+    --reward_latent_dim 1024 \
+    --fea_latent_dim 1024 \
+    --t_relative True \
+    --num_random_neg 2048 \
+    --num_buffer_neg 2048 \
+    --fea_z_noise 0.01 \
+    --fea_t_noise 0.01 \
+    --il_eval_freq 1 \
+    --il_num_epoch 1
