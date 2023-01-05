@@ -238,7 +238,6 @@ class ReplayBuffer(object):
         return stack_obs
 
     def load(self, data_path, filename='dataset.gz'):
-        print('Loading dataset in', data_path)
         if os.path.isfile(data_path):
             # Skip these datasets which have not been finished
             print('Loading dataset from {}'.format(data_path))

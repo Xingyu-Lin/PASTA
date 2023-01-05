@@ -1,8 +1,9 @@
 import numpy as np
-import pytorch3d.loss
 import torch
 
 from core.utils.pc_utils import resample_pc
+from core.utils.torch_chamfer import compute_chamfer_distance
+
 # Define the cardinality of each skill
 cut = {'in': 1, 'out': 2}
 rearrange = {'in': 1, 'out': 1}
@@ -74,7 +75,7 @@ def match_set(pcs_obs, pcs_goal, us_obs, us_goal, n_in, n_out, dist='chamfer', c
     node_idx1, node_idx2 = np.vstack(node_idx1)[:, 0], np.vstack(node_idx2)[:, 0]
 
     if dist == 'chamfer':
-        dist, _ = pytorch3d.loss.chamfer_distance(torch.FloatTensor(stacked_pc1).cuda(), torch.FloatTensor(stacked_pc2).cuda(), batch_reduction=None)
+        dist = compute_chamfer_distance(torch.FloatTensor(stacked_pc1).cuda(), torch.FloatTensor(stacked_pc2).cuda())
         dist = dist.detach().cpu().numpy()
         if verbose:
             import matplotlib.pyplot as plt
@@ -138,7 +139,7 @@ def match_set_pcl(n_sample, pcs_obs, pcs_goal, n_in, n_out, dist='chamfer', cham
     node_idx1, node_idx2 = np.vstack(node_idx1)[:, 0], np.vstack(node_idx2)[:, 0]
 
     if dist == 'chamfer':
-        dist, _ = pytorch3d.loss.chamfer_distance(torch.FloatTensor(stacked_pc1).cuda(), torch.FloatTensor(stacked_pc2).cuda(), batch_reduction=None)
+        dist = compute_chamfer_distance(torch.FloatTensor(stacked_pc1).cuda(), torch.FloatTensor(stacked_pc2).cuda())
         dist = dist.detach().cpu().numpy()
         if verbose:
             import matplotlib.pyplot as plt

@@ -34,7 +34,7 @@ def run_task(arg_vv, log_dir, exp_name):  # Chester launch
 
     # Need to make the environment before moving tensor to torch
     env = make_mp_envs(args.env_name, args.num_env, args.seed)
-    print('------------Env created!!--------')
+    print('=======env created=======')
 
     args.cached_state_path = env.getattr('cfg.cached_state_path', 0)
     action_dim = env.getattr('taichi_env.primitives.action_dim')[0]

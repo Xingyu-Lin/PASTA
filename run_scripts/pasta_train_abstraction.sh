@@ -8,9 +8,9 @@
 python core/pasta/train_pasta.py \
     --env_name 'CutRearrangeSpread-v1' \
     --input_mode 'pc' \
-    --dataset_path 'data/released_datasets/demonstrations/CutRearrangeSpread-v1/0609_crs_dataset' \
+    --dataset_path 'data/released_datasets/CutRearrangeSpread-v1/0609_crs_dataset' \
     --vae_resume_path 'data/released_models/pointflow_vae/CutRearrangeSpread-v1/pointflow_pasta_crs.pt' \
-    --resume_path 'data/released_models/pasta_policy/policy_pasta_cutrearrange.ckpt' \
+    --resume_path 'data/released_models/pasta_policy/policy_pasta_crs.ckpt' \
     --train_modules 'reward' 'fea' \
     --load_modules 'policy' \
     --plan_step 3 \

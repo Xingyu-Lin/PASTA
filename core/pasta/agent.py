@@ -10,7 +10,6 @@ from core.utils import logger
 import os
 import json
 import copy
-import pytorch3d
 from core.models.pointflow_vae import PointFlowVAE
 from core.models.mlp_actor import ActorV0, ActorV1, ActorV2, ActorV3, ActorV4
 from core.utils.pasta_utils import match_set, match_set_pcl, env_skills, env_skills_unfilter
@@ -18,6 +17,7 @@ from core.models.set_cost_predictor import SetCostPredictor
 from core.models.set_fea_predictor import SetFeasibilityPredictor
 from core.pasta.plan.set_trajs import batch_random_choice
 from core.utils.open3d_utils import visualize_pcl_policy_input
+from core.utils.torch_chamfer import compute_chamfer_distance
 
 
 class SetAgent(object):
@@ -136,7 +136,7 @@ class SetAgent(object):
         _, Kg, _ = u_goal.shape
         assert Ko == Kg
         obs_pc, goal_pc = self.vae.decode(u_obs.reshape(-1, self.dimu), 200), self.vae.decode(u_goal.reshape(-1, self.dimu), 200)
-        dist, _ = pytorch3d.loss.chamfer_distance(obs_pc, goal_pc, batch_reduction=None)
+        dist = compute_chamfer_distance(obs_pc, goal_pc)
         dist = dist.view(B, Ko)
         return dist
 
@@ -314,7 +314,7 @@ class SetAgent(object):
         u_obs_goal = torch.FloatTensor(np.hstack([us_obs[idx1], us_goal[idx2]])).to(self.device)
 
         # Compute Chamfer distance as the label
-        dist_label, _ = pytorch3d.loss.chamfer_distance(pc1, pc2, batch_reduction=None)
+        dist_label = compute_chamfer_distance(pc1, pc2)
         pred_score = batch_pred(self.reward_predictor, {'u_obs_goal': u_obs_goal, 'eval': False})
         assert dist_label.shape == pred_score.shape
         all_score_loss = self.reward_predictor.loss(pred_score, dist_label)  # Not reduced

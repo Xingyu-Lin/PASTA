@@ -30,7 +30,8 @@ Xingyu Lin, Zhiao Huang, Yunzhu Li, Joshua B. Tenenbaum, David Held, Chuang Gan
 
 1. Install conda environments by running `conda env create -f environment.yml` and activate the conda
    environment: `conda activate plb`.
-2. Install [torch (1.9.0)](https://pytorch.org/get-started/previous-versions/)
+2. Install [torch (version 1.9.0 tested)](https://pytorch.org/get-started/previous-versions/)
+    * We tested `pip install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html` on RTX 3090.
 3. Install packages for computing the EMD loss:
     * [pykeops (1.5)](https://www.kernel-operations.io/keops/python/installation.html) by
       running `pip install pykeops==1.5`

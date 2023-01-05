@@ -2,7 +2,6 @@ import pickle
 import copy
 import numpy as np
 import torch
-import pytorch3d
 from core.traj_opt.env_spec import get_reset_tool_state
 from core.utils.diffskill_utils import write_number
 from core.utils.pasta_utils import match_set_pcl
@@ -19,7 +18,7 @@ from functools import partial
 from core.pasta.plan.set_trajs import SetTrajs, struct_u_to_pc
 from core.utils.open3d_utils import visualize_point_cloud_batch, visualize_point_cloud_plt
 from core.utils.plb_utils import save_rgb, make_grid
-
+from core.utils.torch_chamfer import compute_chamfer_distance
 
 def generate_batch_loss_func(agent, tids, tiled_u_obs, tiled_u_goal, sin, sout):
     """
@@ -260,7 +259,7 @@ def execute(env, agent, plan_traj, reset_primitive=False, save_name=None, demo=F
         goal_dpc = torch.FloatTensor(goal_dpc).to(agent.device)
         filtered_obs_idx = np.arange(1000)
         obs_dpc = torch.FloatTensor(dpc_start).to(agent.device)
-        dist, _ = pytorch3d.loss.chamfer_distance(obs_dpc, goal_dpc)
+        dist = compute_chamfer_distance(obs_dpc, goal_dpc)
         if dist.item() < agent.args.exec_threshold:
             exec_flag = False
         print("exec flag: ", exec_flag)
