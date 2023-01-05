@@ -47,7 +47,7 @@ PRIMITIVES:
     action:
       dim: 0
 ENV:
-  cached_state_path: datasets/0202_liftspread
+  cached_state_path: datasets/LiftSpread-v1/0202_liftspread
 
 RENDERER:
   name: tina

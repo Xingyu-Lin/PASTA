@@ -40,7 +40,7 @@ PRIMITIVES:
       scale: (0.015, 0.015, 0.015, 0., 0., 0., 0.015) # previous is 0.01 + 0.015
 
 ENV:
-  cached_state_path: datasets/1215_cutrearrange
+  cached_state_path: datasets/CutRearrange-v1/1215_cutrearrange
   env_name: CutRearrange-v1
 
 RENDERER:

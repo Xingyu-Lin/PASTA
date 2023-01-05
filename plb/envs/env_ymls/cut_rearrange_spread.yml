@@ -47,7 +47,7 @@ PRIMITIVES:
     lower_bound: (0., 0.03, 0.)
 
 ENV:
-  cached_state_path: datasets/0609_cutrearrangespread
+  cached_state_path: datasets/CutRearrangeSpread/0609_cutrearrangespread
   env_name: CutRearrangeSpread-v1
 
 RENDERER:
