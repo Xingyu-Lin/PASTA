@@ -86,11 +86,20 @@ For training PASTA, we sequentailly train the point cloud VAE, the polices, the 
 Please refer to the specific arguments in the scripts for details.
 
 1. The point cloud VAE [PointFlow](https://github.com/stevenygd/PointFlow) can be trained by
-   running `PointFlow/scripts/set_<env_name>_gen_dist.sh`.
+   running 
+   ```
+   ./PointFlow/scripts/set_<env_name>_gen_dist.sh
+   ```
 2. The policy networks, which are parameterized by [PointNet++](https://github.com/pyg-team/pytorch_geometric) can be
-   trained by running `run_scripts/pasta_train_policy.sh`
+   trained by running ``
+   ```
+   ./run_scripts/pasta_train_policy.sh
+   ```
 3. Finally, one needs to train PASTA's abstraction modules (feasibility and cost predictors). Make sure you have loaded
-   the trained VAE and policies for correct evaluation. You can run `run_scripts/pasta_train_abstraction.sh`
+   the trained VAE and policies for correct evaluation. You can run
+   ```
+   ./run_scripts/pasta_train_abstraction.sh
+   ```
 
 To plan and execute the PASTA models for evaluation, you can run `run_scripts/pasta_plan.sh`.
 See [Pretrained](#pretrained-models) for the pretrained models.

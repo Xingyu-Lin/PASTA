@@ -60,6 +60,6 @@ if __name__ == '__main__':
     if args.command == 'init_target':
         download_init_target(args.env_name, output_dir='./datasets/')
     elif args.command == 'demo':
-        download_demonstration(args.env_name, output_dir='./data/')
+        download_demonstration(args.env_name, output_dir='./data/released_datasets')
     elif args.command == 'pretrained':
         download_pretrained_model(output_dir='./data/')

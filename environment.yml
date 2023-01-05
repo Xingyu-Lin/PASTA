@@ -1,12 +1,9 @@
 name: plb
 channels:
-  - pytorch
   - conda-forge
   - defaults
 dependencies:
   - numpy=1.21.1
-  - torchvision
-  - cudatoolkit=10.2
   - pip:
     - joblib
     - gym==0.14.0
@@ -18,7 +15,8 @@ dependencies:
     - cloudpickle
     - pyyaml
     - yacs
-    - sklearn
+    - scikit-learn
+    - scipy
     - taichi==0.7.26
     - pyquaternion
     - transformations
