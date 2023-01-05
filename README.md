@@ -26,8 +26,8 @@ Xingyu Lin, Zhiao Huang, Yunzhu Li, Joshua B. Tenenbaum, David Held, Chuang Gan
 1. Install conda environments by running `conda env create -f environment.yml` and activate the conda environment: `conda activate plb`.
 2. Install [torch (1.9.0)](https://pytorch.org/get-started/previous-versions/)
 3. Install packages for computing the EMD loss:
-   * [pykeops (1.5)](https://www.kernel-operations.io/keops/python/installation.html); make sure version is 1.5
-   * [geomloss](https://www.kernel-operations.io/geomloss/api/install.html)
+   * [pykeops (1.5)](https://www.kernel-operations.io/keops/python/installation.html) by running `pip install pykeops==1.5`
+   * [geomloss](https://www.kernel-operations.io/geomloss/api/install.html) by running `pip install geomloss`
 4. Install necessary packages for [PointFlow](https://github.com/stevenygd/PointFlow), which we use for encoding point clouds into latent space.
 5. Run `./prepare.sh` to activate the conda environment and set up the path
 
@@ -62,7 +62,7 @@ To plan and execute the PASTA models for evaluation, you can run `run_scripts/pa
 [ ] TODO
 
 ### Pretrained models and data
-* Download demonstration trajectories: [[Google Drive link for demonstration trajectories (16G)]](https://drive.google.com/drive/folders/1uzFKI5rehp2VMYc5MKyE-CPbSoEcKCup?usp=share_link)
+* Download post-processed demonstration trajectories: [[Google Drive link for demonstration trajectories (16G)]](https://drive.google.com/drive/folders/1uzFKI5rehp2VMYc5MKyE-CPbSoEcKCup?usp=share_link)
 * Download pretrained PASTA models: [[Google Drive link for pre-trained models (300M)]](https://drive.google.com/drive/folders/18tmH0stc1z_TzfAHbQDu5HASNkaWFKk_?usp=share_link)
 
 Bon Appetit!
