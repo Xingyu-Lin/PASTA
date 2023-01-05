@@ -44,7 +44,16 @@ This code includes the three tasks from the PASTA paper. The visualization shows
 
 ### Preparation
 1. **Environment setup** We need to first generate initial and target configurations for each environment both for generating demonstration and for evaluation
-   * You can download the pre-generated initial and target configurations here: [[Google Drive link for datasets (3G)]](https://drive.google.com/drive/folders/1ckOkxsuqK44Ay0e1I5EKmX3cOATB4Jam?usp=share_link). Unzip the downloaded file and put the `data` folder under the root directory of this repository.
+   * You can download the pre-generated initial and target configurations by running the following scripts:
+   ``` 
+   # For LiftSpread-v1
+   gdown https://drive.google.com/uc?id=1b4Qw6cbWbtEiP3MO7v6WOLkgCplFnDb1
+   # For CutRearrange-v1
+   gdown https://drive.google.com/uc?id=1XFGKwngAX_4gVzmP38DMv0mo44a9e3Sd
+   # For CutRearrangeSpread-v1
+   gdown https://drive.google.com/uc?id=1IEAev3VeCXAKVEeZmYlWjlT2MHLWyedl
+   ```
+   Unzip the downloaded file and put the `data` folder under the root directory of this repository. 
    * Alternatively, you can generate the initial and target configurations by running `python run_scripts/generate_initial_target.py`.
 2. **Generate demonstration** We run gradient-based trajectory optimization (GBTO) given each initial and target configuration. An example run script is `run_scripts/run_gbto.sh`. 
     You also need to post-process the demonstration data by running DBSCAN. This can be done by running `run_scripts/run_dbscan.sh`.
@@ -62,7 +71,14 @@ To plan and execute the PASTA models for evaluation, you can run `run_scripts/pa
 [ ] TODO
 
 ### Pretrained models and data
-* Download demonstration trajectories: [[Google Drive link for demonstration trajectories (16G)]](https://drive.google.com/drive/folders/1uzFKI5rehp2VMYc5MKyE-CPbSoEcKCup?usp=share_link)
+* Download demonstration trajectories. You can download the pre-generated initial and target configurations by running the following scripts:
+   ``` 
+   # For LiftSpread-v1 (6G)
+   gdown https://drive.google.com/uc?id=1gRaaMEG6ytmjOOqG-K79kMteGhXW_QFB
+   # For CutRearrange-v1 (5G)
+   gdown https://drive.google.com/uc?id=1wKgFLSkdueVGoy_vDGxPiOnVwENKsSZT
+   # For CutRearrangeSpread-v1 (3G)
+   gdown https://drive.google.com/uc?id=1OFcC8po2ZBmgMxtJ5C7uiWPG7ESm5W2v
 * Download pretrained PASTA models: [[Google Drive link for pre-trained models (300M)]](https://drive.google.com/drive/folders/18tmH0stc1z_TzfAHbQDu5HASNkaWFKk_?usp=share_link)
 
 Bon Appetit!
