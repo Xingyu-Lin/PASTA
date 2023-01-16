@@ -92,7 +92,7 @@ Please refer to the specific arguments in the scripts for details.
    ./PointFlow/scripts/set_<env_name>_gen_dist.sh
    ```
 2. The policy networks, which are parameterized by [PointNet++](https://github.com/pyg-team/pytorch_geometric) can be
-   trained by running ``
+   trained by running
    ```
    ./run_scripts/pasta_train_policy.sh
    ```
@@ -107,7 +107,17 @@ See [Pretrained](#pretrained-models) for the pretrained models.
 
 ### Notes for DiffSkill
 
-[ ] TODO
+For training DiffSkill, you can train the rgbd VAE, the polices, the feasibility and the cost predictors jointly by 
+running
+```
+./run_scripts/diffskill_train_all.sh
+```
+* Alternatively, you may first train the rgbd VAE by keeping only `"vae"` in `--train_modules`. 
+Then, you can load the pre-trained VAE by adding `--vae_resume_path <PATH TO PRETRAINED VAE MODEL>`.
+
+To plan and execute the PASTA models for evaluation, you can run `run_scripts/diffskill_plan.sh`.
+See [Pretrained](#pretrained-models) for the pretrained models.
+   
 
 ### Pretrained models
 All pretrained models can be downloaded in one command:
