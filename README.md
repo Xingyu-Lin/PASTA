@@ -72,7 +72,7 @@ and policies.
    Change `CutRearrange-v1` to `LiftSpread-v1` or `CutRearrangeSpread-v1` for other environments. It will be put under
    the `dataset` folder under the project root by default.
     * Alternatively, you can generate the initial and target configurations by
-      running `python run_scripts/generate_initial_target.py`.
+      running `python run_scripts/generate_init_target.sh`. Note that the saved init and target configurations will be saved to the path that you specify as `--save_dir`. After generating the initial and target configurations, you also need to modify the corresponding environment yaml file in `plb/envs/env_ymls/` by replacing the path under `ENV: cached_state_path` to the path of `--save_dir` from your generation script.
 2. **Generate demonstration** Given these initial and target configurations, we run gradient-based trajectory optimization (GBTO) to generate the demonstration trajectories. An example run script is `run_scripts/run_gbto.sh`.
    You also need to post-process the demonstration (to get the clusters for spatial abstraction) data by running DBSCAN. This can be done by
    running `run_scripts/run_dbscan.sh`.
