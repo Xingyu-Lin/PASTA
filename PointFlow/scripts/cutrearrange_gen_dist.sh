@@ -1,4 +1,5 @@
 #! /bin/bash
+# Number of GPUs used for parallelized training in the paper: 4
 
 dims="512-512-512"
 latent_dims="256-256"
@@ -9,7 +10,7 @@ batch_size=128
 tr_max_sample_points=1000
 te_max_sample_points=1000
 lr=2e-3
-epochs=20
+epochs=12
 ds=dynabs
 env_name='CutRearrange-v1'
 data_dirs='<PATH TO DEMONSTRATION DATASET>'

@@ -1,4 +1,5 @@
 #! /bin/bash
+# Number of GPUs used for parallelized training in the paper: 8
 
 dims="512-512-512"
 latent_dims="256-256"
