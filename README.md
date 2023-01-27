@@ -105,7 +105,7 @@ Please refer to the specific arguments in the scripts for details.
 To plan and execute the PASTA models for evaluation, you can run `run_scripts/pasta_plan.sh`.
 See [Pretrained](#pretrained-models) for the pretrained models.
 
-### Notes for DiffSkill
+### Training and evaluation of DiffSkill
 
 For training DiffSkill, you can train the rgbd VAE, the polices, the feasibility and the cost predictors jointly by 
 running
