@@ -9,7 +9,7 @@ python core/pasta/train_pasta.py \
     --train_modules 'policy' \
     --plan_step 3 \
     --num_tools 3 \
-    --dim_z 2 \
+    --dimz 2 \
     --batch_size 256 \
     --actor_batch_size 10 \
     --actor_latent_dim 64 \
